@@ -28,40 +28,7 @@ function stopTimer(){
     // startTimer();
 }
 
+
 restart.addEventListener('click',stopTimer)
 pause.addEventListener('click',pauseTimer);
 start.addEventListener('click',startTimer);
-
-const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-recognition.lang = "en-US";
-recognition.interimResults = true;
-recognition.maxAlternatives = 1;
-recognition.continuous = true;
-
-recognition.onstart = () => {
-    console.log("Voice recognition started. Listening for commands...");
-};
-
-recognition.onresult = (event) => {
-    const command = event.results[0][0].transcript.toLowerCase();
-    console.log(command);
-
-    if(command.includes('start')){
-        startTimer();
-    }else if(command.includes('pause')){
-        pauseTimer();
-    }else if(command.includes('stop')){
-        stopTimer();
-    }
-    console.log(command);
-}
-
-recognition.start();
-
-function speakfeedback(text) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    window.speechSynthesis.speak(utterance);
-}
-
-
-
